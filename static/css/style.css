@@ -1,0 +1,63 @@
+body {
+    background-color: black;
+    color: white;
+    margin: 8%;
+    padding: 2%;
+
+}
+
+header {
+    color: white;
+    padding: 15px;
+}
+/* Estilo para el contenedor del formulario */
+.form-container {
+    max-width: 600px; /* Máximo ancho del contenedor */
+    margin: 0 auto; /* Centrar horizontalmente */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+/* Estilo para el título del formulario */
+.form-container h1 {
+    margin-bottom: 20px; /* Espacio debajo del título */
+}
+
+/* Estilo para el botón */
+.btn-submit {
+    background-color: #007bff; /* Color de fondo del botón */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px 20px; /* Espaciado interno */
+    cursor: pointer; /* Cambiar el cursor al pasar el mouse */
+    transition: background-color 0.3s; /* Transición suave para el color de fondo */
+    display: inline-block; /* Hacer que el botón se comporte como un elemento de bloque */
+    width: 100%; /* Ancho completo */
+}
+
+/* Efecto hover para el botón */
+.btn-submit:hover {
+    background-color: #0056b3; /* Color del botón al pasar el mouse */
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+}
+
+.logo {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.img-detalle {
+    margin: 15%;
+}
+
+.img-perfil {
+    width: 200px;
+}

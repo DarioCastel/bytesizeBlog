@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            background-image: url("{% static 'img/backgroundmain.jpg' %}"); 
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat; 
+            background-attachment: fixed;
+            padding-top: 70px;
+            margin: 0;
+            height: 100vh; 
+            justify-content: center;
+            overflow: hidden;
+        }
+        #button {
+            padding: 15px 35px;
+            font-size: 20px;
+            background-color: #14FCEC;
+            color: blue;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            position: fixed; 
+            left: 51.5%; 
+            transform: translateX(-50%); 
+            bottom: 8%; 
+        }
+        #button:hover {
+            background-color: #22F943;
+        }
+    </style>
+    <title>ByteSize</title>
+</head>
+<body>
+    <a id="button" href="{% url 'noticias' %}">Ir a otra página</a>
+</body>
+</html>

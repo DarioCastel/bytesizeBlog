@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block titulo %} Noticias detalle {% endblock titulo %}
+{% block contenido %}
+<style>
+.text-bold {
+    font-weight: bold;
+}
+
+.text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+</style>
+<div class="container my-4">
+    <!-- Botón Modificar solo para el autor -->
+    {% if user.id == noticia.autor_id or user.is_superuser%}
+    <div class="mb-4 text-end">
+        <a class="btn btn-warning" href="{% url 'modificar_post' noticia.pk %}">Modificar</a>
+    </div>
+    {% endif %}
+
+    <!-- Detalle de la noticia -->
+    <h1 class="mb-4 text-bold text-shadow">{{ noticia.titulo }}</h1>
+
+    <!-- Imagen -->
+    <img class="img-fluid mb-4" src="{{ noticia.imagen1.url }}" alt="{{ noticia.titulo }}" style="max-height: 200px; object-fit: cover;">
+    <img class="img-fluid mb-4" src="{{ noticia.imagen2.url }}" alt="{{ noticia.titulo }}" style="max-height: 200px; object-fit: cover;">
+
+    <!-- Contenido de la noticia -->
+    <p class="text-bold text-shadow">{{ noticia.contenido }}</p>
+
+    <!-- Información adicional -->
+    <p class="text-muted">Fecha de publicación: {{ noticia.fecha_publicacion }}</p>
+    <p class="text-muted">Categoría: <strong>{{ noticia.categoria }}</strong></p>
+
+    <!-- Autor de la noticia -->
+    <p class="text-muted">
+        {% if noticia.autor.icono %}
+        <img width="20px" src="{{ noticia.autor.icono.url }}" alt="autor-icon">
+        {% else %}
+        <img width="20px" src="https://th.bing.com/th/id/R.0ababdb27dd0bb71f21f03c98b6cd6f1?rik=%2fiVDxahrgNztPA&pid=ImgRaw&r=0" alt="autor-icon">
+        {% endif %}
+        {{ noticia.autor }}
+    </p>
+
+    <!-- Sección de comentarios -->
+    <div class="mt-5">
+        <h2>Escribe un comentario</h2>
+        {% if user.is_authenticated %}
+        <form action="{% url 'comentar' %}" method="post">
+            {% csrf_token %}
+            <div class="form-floating mb-3">
+                <textarea class="form-control" name="comentario" placeholder="Escribe tu comentario aquí..." style="height: 100px;"></textarea>
+                <label for="comentario">Tu comentario</label>
+            </div>
+            
+                <input type="hidden" name="id_noticia" value="{{ noticia.pk }}">
+                <input type="submit" class="btn btn-primary" value="Comentar">
+        {% else %}
+        <p>Para comentar, inicia secion o registrate</p>
+            <a href="{% url 'login' %}" class="boton-enlace">Inicio de sesión</a>
+            
+                    
+        {% endif %}
+
+
+        </form>
+    </div>
+
+    <!-- Comentarios -->
+    <div class="mt-5">
+        <h2>Comentarios</h2>
+        {% for comentario in comentarios %}
+        <div class="card mb-3" style="max-width: 400px; opacity: 0.8; background-color: rgba(128, 128, 128, 0.8); border: 1px solid #007bff;">
+            <div class="card-header">
+                Publicado el {{ comentario.fecha_publicacion }}
+            </div>
+            <div class="card-body d-flex align-items-center">
+                <!-- Icono del usuario -->
+                {% if comentario.autor.icono %}
+                <img width="30px" src="{{ comentario.autor.icono.url }}" alt="usuario-icon" class="me-2">
+                {% else %}
+                <img width="30px" src="https://th.bing.com/th/id/R.0ababdb27dd0bb71f21f03c98b6cd6f1?rik=%2fiVDxahrgNztPA&pid=ImgRaw&r=0" alt="usuario-icon" class="me-2">
+                {% endif %}
+                <div class="flex-grow-1">
+                    <h5 class="card-title">{{ comentario.autor }}</h5>
+                    <p class="card-text">{{ comentario.contenido }}</p>
+                    <!-- Botones para modificar y eliminar comentario -->
+                    {% if user.is_authenticated and comentario.autor == user or user.is_staff %}    
+                        <div class="text-end">
+                            <a class="btn btn-warning btn-sm" href="{% url 'modificar_comentario' comentario.pk %}">Modificar</a>
+                            <a class="btn btn-danger btn-sm" href="{% url 'borrar_comentario' comentario.pk %}">Eliminar</a>
+                        </div>
+                    {% endif %}    
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock contenido %}

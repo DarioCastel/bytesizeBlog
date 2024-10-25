@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block titulo %}
+Registro
+{% endblock titulo %}
+
+{% block contenido %}
+<div class="container d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+    <div class="card shadow-lg" style="width: 100%; max-width: 500px; background: rgba(255, 255, 255, 0.8); border-radius: 15px; padding: 30px;">
+        <h1 class="text-center">Registro de Usuarios</h1>
+        <div class="mb-3">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary w-100">Enviar</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="character-images">
+        <img src="{% static 'img/personaje_izquierda.png' %}" alt="Personaje Izquierda" class="character" style="left: 300px;">
+        <img src="{% static 'img/personaje_derecha.png' %}" alt="Personaje Derecha" class="character" style="right: 300px;">
+    </div>
+</div>
+
+<style>
+
+
+    .character-images {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100%;
+        z-index: -1; 
+    }
+
+    .character {
+        position: absolute;
+        width: 100px; 
+    }
+
+    
+    .btn-primary {
+        transition: background-color 0.3s, box-shadow 0.3s; 
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    }
+    
+</style>
+{% endblock contenido %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block titulo %} Perfil de usuario {% endblock %}
+
+{% block contenido %}
+<div class="perfil-container">
+    <h1 class="perfil-titulo">Perfil de usuario</h1>
+    
+    <div class="perfil-info">
+        {% if usuarios.icono and usuarios.icono.url %}
+            <img src="{{ usuarios.icono.url }}" alt="Icono de perfil" class="img-perfil">
+        {% else %}
+            <div class="icono-placeholder">Sin icono</div>
+        {% endif %}
+
+        <div class="perfil-detalles">
+            <h2>ID: {{ usuarios.id }}</h2>
+            <h2>Nombre de usuario: {{ usuarios.username }}</h2>
+        </div>
+    </div>
+</div>
+{% endblock %}

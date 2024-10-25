@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Contacto{% endblock titulo %}
+
+{% block contenido %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card shadow-lg" style="background-color: rgba(255, 255, 255, 0.8); border-radius: 20px; padding: 20px;">
+                <div class="card-body">
+                    <h1 class="text-center mb-4">Contacto</h1>
+                    
+                    <form action="{% url 'contacto' %}" method="post">
+                        {% csrf_token %}
+                        
+                        {{ form.as_p }}  
+                        
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-lg btn-primary px-5 py-2 rounded-pill shadow-sm">
+                                Enviar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock contenido %}
